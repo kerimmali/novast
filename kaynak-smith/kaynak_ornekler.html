@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8">
+<title>Kaynak Örnekleri: Smith + Dikiş Faktörleri</title>
+<style>@page { size: A4; margin: 16mm 17mm 18mm 17mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: "Inter", "DejaVu Sans", sans-serif;
+  font-size: 10.4pt; line-height: 1.45; color: #1d232a; background: #ffffff; margin: 0;
+}
+h1 { font-size: 23pt; font-weight: 600; line-height: 1.15; margin: 0 0 6px; letter-spacing: -0.01em; }
+h2 { font-size: 15pt; font-weight: 600; margin: 20px 0 8px; letter-spacing: -0.005em; break-after: avoid; }
+h3 { font-size: 12pt; font-weight: 600; margin: 16px 0 6px; break-after: avoid; }
+p { margin: 6px 0; }
+ul, ol { margin: 6px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+sub { font-size: 0.72em; vertical-align: -0.3em; line-height: 0; }
+.cover { border-bottom: 1px solid #d9dde2; padding-bottom: 10px; margin-bottom: 6px; }
+.sub { color: #5d6670; margin: 0; }
+.small { font-size: 9.6pt; color: #3c444d; }
+.pb { break-before: page; }
+.pb > h2:first-child { margin-top: 0; }
+
+.key { background: #f3f6f9; border-left: 3px solid #2563eb; padding: 8px 12px; margin: 10px 0; break-inside: avoid; }
+.warn { background: #fdf1ef; border-left: 3px solid #c0392b; padding: 8px 12px; margin: 10px 0; break-inside: avoid; }
+.q { background: #f5f5f2; border: 1px solid #e3e3dc; padding: 8px 12px; margin: 8px 0; }
+.prev { color: #2d343c; }
+.verdict { background: #eaf6ee; border-left: 3px solid #1e8a4c; padding: 7px 12px; margin: 10px 0 4px; break-inside: avoid; }
+.calc { margin: 6px 0 6px 4px; }
+.chk { display: block; font-size: 9.4pt; color: #5d6670; margin-top: 2px; }
+
+.fig { margin: 8px 0 6px; text-align: center; break-inside: avoid; }
+.fig svg { width: 100%; max-width: 142mm; height: auto; }
+.photo { margin: 8px auto; text-align: center; break-inside: avoid; }
+.photo img { width: 108mm; border: 1px solid #d9dde2; }
+figcaption { font-size: 9.2pt; color: #5d6670; margin-top: 4px; text-align: left; }
+
+.legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; font-size: 9pt; color: #3c444d; margin-top: 2px; }
+.legend > span { display: inline-flex; align-items: center; gap: 6px; }
+.lg-line { display: inline-block; width: 18px; height: 3px; border-radius: 2px; }
+.lg-bar { display: inline-block; width: 7px; height: 14px; }
+.lg-box { display: inline-block; width: 16px; height: 11px; background: #eef2f7; border: 1px solid #1d232a; }
+
+.moves { list-style: none; padding-left: 4px; }
+.moves li { margin: 4px 0; }
+.mv { display: inline-block; min-width: 58px; font-weight: 600; font-size: 9.6pt; padding: 1px 6px; border-radius: 4px; margin-right: 6px; text-align: center; }
+.mv.r { background: #fbe9e6; color: #a12f23; }
+.mv.k { background: #eceef1; color: #1d232a; }
+.moves.big li { margin: 6px 0; }
+
+.t { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 9.8pt; break-inside: avoid; }
+.t th, .t td { border: 1px solid #dfe3e7; padding: 5px 8px; text-align: left; vertical-align: top; }
+.t th { background: #f5f6f4; font-weight: 600; }
+.t.ans td:nth-child(n+2):nth-child(-n+5), .t.sum td:nth-child(n+2):nth-child(-n+6) { text-align: right; font-variant-numeric: tabular-nums; }
+.t.sum tr.hl td { background: #f3f6f9; font-weight: 600; }
+
+.formula { font-size: 15pt; text-align: center; margin: 10px 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; }
+.frac > span:first-child { border-bottom: 1.4px solid #1d232a; padding: 0 6px 2px; }
+.frac > span:last-child { padding: 2px 6px 0; }
+.hoca li { margin: 4px 0; }
+
+.ex { break-before: page; }
+.ex > h2 { margin-top: 0; }
+.steps { break-inside: auto; }
+.tips li { margin: 4px 0; }
+
+.row { display: flex; gap: 14px; align-items: flex-start; margin: 6px 0; break-inside: avoid; }
+.row .col-fig { flex: 0 0 42%; text-align: center; }
+.row .col-fig svg { width: 100%; height: auto; }
+.row .col-txt { flex: 1; }
+.row.two > div { flex: 1; min-width: 0; }
+.st { display: inline-block; background: #1d232a; color: #fff; font-size: 8.6pt; font-weight: 600; padding: 0 6px; border-radius: 3px; margin-right: 4px; }
+.lbl { margin: 4px 0 2px; }
+ul.tight, ol.tight { margin: 2px 0 4px; }
+ul.tight li, ol.tight li { margin: 1px 0; }
+.sumline { background: #f3f6f9; padding: 5px 10px; border-radius: 4px; }
+.fig.sm svg { max-width: 108mm; }
+.center { text-align: center; }
+.t.v1 td, .t.v1 th { text-align: center; }
+.t.v1 td:first-child { text-align: left; }
+.t.v1 .hl { background: #eaf6ee; font-weight: 700; }
+.recipe li { margin: 4px 0; }
+.t.quiz2 td:last-child { white-space: nowrap; }
+.t.sum2 td:nth-child(n+3):nth-child(-n+8) { text-align: right; font-variant-numeric: tabular-nums; }
+.ex .calc { margin: 4px 0; }
+</style></head>
+<body>
+
+<header class="cover">
+<h1>Kaynak Örnekleri Baştan Sona: Smith Diyagramı + Dikiş Faktörleri</h1>
+<p class="sub">Makina Elemanları I · Sınav hazırlığı · 4 basit örnek: aşağı, ortadan sağa, üstten, alttan</p>
+</header>
+
+<p>Bu PDF'te sadece hocanın sorduğu tarzdaki 4 basit örnek var (60° asıl soru yok). Her örneği en baştan, aynı 6 adımla çözüyoruz: gerilmeler → statik kontrol → Smith diyagramı → dikiş faktörleri → karar. İlk Smith PDF'inde örnek olsun diye b<sub>0</sub>, b<sub>1</sub>, β<sub>k</sub> koymuştum; burada onların yerine <b>hocanın kaynak slaytlarındaki v<sub>1</sub>, v<sub>2</sub>, v<sub>3</sub></b> var.</p>
+
+<h2>1. Parça ve bir kere hesaplanan sayılar</h2>
+<div class="row">
+<div class="col-fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 260" width="330" height="260" font-family="Inter, sans-serif">
+<rect x="127.0" y="61.0" width="46.0" height="138.0" fill="#e9ecef" stroke="#1d232a" stroke-width="1.2"/>
+<rect x="113.2" y="61.0" width="13.8" height="138.0" fill="#d9822b" opacity="0.85"/>
+<rect x="173.0" y="61.0" width="13.8" height="138.0" fill="#d9822b" opacity="0.85"/>
+<rect x="127.0" y="47.2" width="46.0" height="13.8" fill="#1e8a4c" opacity="0.85"/>
+<rect x="127.0" y="199.0" width="46.0" height="13.8" fill="#1e8a4c" opacity="0.85"/>
+<line x1="95.2" y1="130" x2="204.8" y2="130" stroke="#6b7480" stroke-dasharray="6 3 1.5 3"/>
+<text x="93.2" y="134" font-size="11" fill="#6b7480" text-anchor="end">eksen</text>
+<line x1="127.0" y1="228.8" x2="173.0" y2="228.8" stroke="#1d232a" stroke-width="0.8"/>
+<text x="150" y="242.8" font-size="11.5" fill="#1d232a" text-anchor="middle">20</text>
+<line x1="216.8" y1="61.0" x2="216.8" y2="199.0" stroke="#1d232a" stroke-width="0.8"/>
+<text x="222.8" y="152.0" font-size="11.5" fill="#1d232a">60</text>
+<line x1="250.8" y1="47.2" x2="250.8" y2="130.0" stroke="#c0392b" stroke-width="1"/>
+<line x1="246.8" y1="47.2" x2="254.8" y2="47.2" stroke="#c0392b"/>
+<text x="256.8" y="92.6" font-size="11.5" fill="#c0392b">y = 36</text>
+<text x="150" y="39.2" font-size="11.5" fill="#1d232a" text-anchor="middle">a = 6</text>
+</svg>
+<div class="legend"><span><span class="lg-box" style="background:#d9822b;border-color:#d9822b"></span><span>dikey dikişler: çekme + kayma</span></span><span><span class="lg-box" style="background:#1e8a4c;border-color:#1e8a4c"></span><span>yatay dikişler: sadece çekme</span></span></div></div>
+<div class="col-txt">
+<p><b>Parça:</b> 20×60 mm, St37, duvara çepeçevre a = 6 mm köşe dikişiyle kaynaklı, 1. kalite. Dört dikiş var: üstte ve altta 20'lik iki yatay, solda ve sağda 60'lık iki dikey.</p>
+<ol class="tight">
+<li><b>Çekme alanı A = 960 mm²</b>: dört dikişin hepsi. 2·6·20 + 2·6·60 = 240 + 720.</li>
+<li><b>Kayma alanı A<sub>k</sub> = 720 mm²</b>: sadece kuvvete paralel (dikey) dikişler. 2·6·60.</li>
+<li><b>I = 478 080 mm⁴</b>: dikey 2·6·60³/12 = 216 000, yatay 2·[20·6³/12 + 20·6·33²] = 262 080.</li>
+<li><b>W = I / y = 478 080 / 36 = 13 280 mm³</b>. y = 36 = 30 + 6 (en uzak lif, dikişin dış kenarı).</li>
+</ol>
+</div>
+</div>
+<div class="key">
+<p><b>Formüller:</b> çekme σ<sub>ç</sub> = F<sub>x</sub>/960 · kayma τ = F<sub>y</sub>/720 · eğilme σ<sub>e</sub> = M/13 280 · toplam σ = σ<sub>ç</sub> + σ<sub>e</sub> · eşdeğer σ<sub>v</sub> = √(σ² + 3τ²)</p>
+<p><b>F = 8000 ± 2000 N:</b> 8000 statik kısım → <b>σ<sub>vm</sub></b> (ortalama). ±2000 dinamik kısım → <b>σ<sub>vg</sub></b> (genlik). Her şey kuvvetle orantılı, o yüzden dinamik gerilme = statik / 4.</p>
+</div>
+
+<section class="pb">
+<h2>2. Dikiş faktörleri (hocanın kaynak slaytları)</h2>
+<div class="formula"><span>σ<sub>kem</sub> = v<sub>1</sub> · v<sub>2</sub> · v<sub>3</sub> · σ<sub>em</sub></span></div>
+<p class="center small">σ<sub>kem</sub>: kaynağın emniyet gerilmesi · σ<sub>em</sub>: yapı elemanının (parçanın) emniyet gerilmesi</p>
+<table class="t">
+<tr><th>Faktör</th><th>Ne demek?</th><th>Bizim örneklerde</th><th>Neden?</th></tr>
+<tr><td><b>v<sub>1</sub></b> dikiş faktörü</td><td>Yorulmada gerilme yığılması (dikişin çentik etkisi). <b>Statikte 1.</b></td><td>statik <b>1</b> · dinamik <b>0,42</b></td><td>tablo: iki taraflı, düz köşe dikişi</td></tr>
+<tr><td><b>v<sub>2</sub></b> kalite faktörü</td><td>Kaynağın kalitesi</td><td><b>1</b></td><td>1. kalite</td></tr>
+<tr><td><b>v<sub>3</sub></b> gerilme faktörü</td><td>Dikiş türü ve zorlanma türü</td><td><b>0,8</b></td><td>çelik, köşe (boğaz) kaynağı, her zorlanma</td></tr>
+<tr><td><b>σ<sub>em</sub></b></td><td>Parçanın emniyet gerilmesi</td><td>statik <b>170</b> · dinamik <b>σ<sub>ed</sub>'</b></td><td>dinamikte Smith diyagramından okunur</td></tr>
+</table>
+
+<h3>v<sub>1</sub>: Köşe dikişleri tablosu (hocanın slaytından)</h3>
+<table class="t v1">
+<tr><th rowspan="2">Köşe dikişler</th><th colspan="3">Tek taraflı (alan a·l)</th><th colspan="3">İki taraflı (alan 2a·l)</th></tr>
+<tr><th>Dışbükey</th><th>Düz</th><th>İçbükey</th><th>Dışbükey</th><th class="hl">Düz</th><th>İçbükey</th></tr>
+<tr><td>1. satır: σ<sub>⊥</sub> çekme</td><td>0,28</td><td>0,3</td><td>0,33</td><td>0,38</td><td class="hl">0,42</td><td>0,5</td></tr>
+<tr><td>2. satır: σ<sub>⊥</sub> basma</td><td>0,5</td><td>0,54</td><td>0,6</td><td>0,54</td><td class="hl">0,6</td><td>0,7</td></tr>
+<tr><td>3. satır: τ<sub>∥</sub> kayma</td><td>0,28</td><td>0,3</td><td>0,33</td><td>0,38</td><td class="hl">0,42</td><td>0,5</td></tr>
+</table>
+<p class="small"><b>Hangi sütun?</b> Parça duvara çepeçevre kaynaklı, yani iki yanında da dikiş var → <b>iki taraflı</b>. Dikiş şekli yazmıyorsa → <b>düz</b>. Bu sütunda çekme ve kayma ikisi de <b>0,42</b>, o yüzden kayma olan Örnek 1'de de aynı sayıyı kullanırız. En çok zorlanan yer hep çekilen lif olduğu için 2. satıra (basma, 0,6) gerek yok. Soruda başka bir dikiş türü yazarsa (ör. “tek taraflı düz”) o sütundan oku. (Slayttaki dipnot numaralarını göremedim; satırları değerlere bakarak çekme, basma, kayma diye okudum. Basma her sütunda en büyük, çünkü basılan dikiş daha az yorulur.)</p>
+
+<div class="row two">
+<div>
+<h3>v<sub>2</sub>: Kalite faktörü</h3>
+<table class="t">
+<tr><th>Eski sistem</th><th>v<sub>2</sub></th></tr>
+<tr><td>I. kalite</td><td><b>1</b></td></tr>
+<tr><td>II. kalite</td><td>0,8</td></tr>
+<tr><td>III. kalite</td><td>0,5</td></tr>
+</table>
+<table class="t">
+<tr><th>Yeni sistem</th><th>v<sub>2</sub></th></tr>
+<tr><td>Hiç dış denetim yok</td><td>0,5</td></tr>
+<tr><td>Sadece gözle kontrol</td><td>0,8</td></tr>
+<tr><td>Normal kalite</td><td>0,9</td></tr>
+<tr><td>Özel kalite</td><td>1,0</td></tr>
+</table>
+</div>
+<div>
+<h3>v<sub>3</sub>: Gerilme faktörü</h3>
+<table class="t">
+<tr><th>Dikiş</th><th>Zorlanma</th><th>Çelik</th><th>Alüminyum</th></tr>
+<tr><td rowspan="4">Alın</td><td>Çekme</td><td>1,0</td><td>1,0</td></tr>
+<tr><td>Basma</td><td>1,0</td><td>1,0</td></tr>
+<tr><td>Eğilme</td><td>1,0</td><td>1,0</td></tr>
+<tr><td>Kesme, burulma</td><td>0,8</td><td>0,65</td></tr>
+<tr><td>Boğaz (köşe)</td><td>Herhangi</td><td><b>0,8</b></td><td>0,65</td></tr>
+</table>
+<p class="small">“Boğaz kaynağı” = köşe kaynağı. Adını a boğaz kalınlığından alır. Bizim dikiş köşe dikişi, çelik → <b>v<sub>3</sub> = 0,8</b>.</p>
+</div>
+</div>
+
+<div class="key">
+<p><b>Bütün örneklerde kullanacağımız iki sayı:</b></p>
+<ul class="tight">
+<li><b>Statik:</b> σ<sub>kem</sub> = 1 · 1 · 0,8 · 170 = <b>136 N/mm²</b>. Hocanın tahtadaki 136'sı tam bu: 136 / 0,8 = 170, yani parça için σ<sub>em</sub> = 170 alınmış.</li>
+<li><b>Dinamik:</b> σ<sub>kem,D</sub> = 0,42 · 1 · 0,8 · σ<sub>ed</sub>' = <b>0,336 · σ<sub>ed</sub>'</b>. Burada σ<sub>em</sub> yerine Smith diyagramından okunan σ<sub>ed</sub>' girer.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>3. Smith diyagramı: 30 saniyede hatırlatma</h2>
+<figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>
+<line x1="120.5" y1="16.0" x2="120.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="183.0" y1="16.0" x2="183.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="245.5" y1="16.0" x2="245.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="308.0" y1="16.0" x2="308.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="370.5" y1="16.0" x2="370.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="433.0" y1="16.0" x2="433.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="495.5" y1="16.0" x2="495.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="366.0" x2="508.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="334.8" x2="508.0" y2="334.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="303.5" x2="508.0" y2="303.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="272.2" x2="508.0" y2="272.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="209.8" x2="508.0" y2="209.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="178.5" x2="508.0" y2="178.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="147.2" x2="508.0" y2="147.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="116.0" x2="508.0" y2="116.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="84.8" x2="508.0" y2="84.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="53.5" x2="508.0" y2="53.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="22.2" x2="508.0" y2="22.2" stroke="#e7e9ec" stroke-width="1"/>
+<polygon points="58.0,134.8 299.7,34.8 470.5,34.8 470.5,34.8 299.7,205.6 58.0,347.2" fill="#eef2f7"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#1d232a" stroke-width="1.3"/>
+<line x1="58.0" y1="366.0" x2="58.0" y2="16.0" stroke="#1d232a" stroke-width="1.3"/>
+<text x="183.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">100</text>
+<text x="308.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">200</text>
+<text x="433.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">300</text>
+<text x="508.0" y="270.0" font-size="12" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">σ<tspan font-size="9" dy="3">m</tspan><tspan dy="-3"> (N/mm²)</tspan></text>
+<text x="51.0" y="370.0" font-size="11" fill="#6b7480" text-anchor="end">−200</text>
+<text x="51.0" y="307.5" font-size="11" fill="#6b7480" text-anchor="end">−100</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text x="51.0" y="182.5" font-size="11" fill="#6b7480" text-anchor="end">100</text>
+<text x="51.0" y="120.0" font-size="11" fill="#6b7480" text-anchor="end">200</text>
+<text x="51.0" y="57.5" font-size="11" fill="#6b7480" text-anchor="end">300</text>
+<text x="51.0" y="138.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">170</text>
+<text x="51.0" y="351.2" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">−170</text>
+<text x="51.0" y="38.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">330</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text transform="translate(14,191.0) rotate(-90)" font-size="12" fill="#1d232a" text-anchor="middle">gerilme σ (N/mm²)</text>
+<line x1="58.0" y1="241.0" x2="495.5" y2="22.2" stroke="#7a828c" stroke-width="1.3" stroke-dasharray="7 3 1.5 3"/>
+<line x1="58.0" y1="241.0" x2="276.8" y2="22.2" stroke="#9aa3ad" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="281.0" y="21.0" font-size="11" fill="#6b7480">x = 0</text>
+<polyline points="58.0,134.8 299.7,34.8 470.5,34.8" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<polyline points="470.5,34.8 299.7,205.6 58.0,347.2" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="58.0" cy="134.8" r="3.2" fill="#1d232a"/>
+<circle cx="58.0" cy="347.2" r="3.2" fill="#1d232a"/>
+<circle cx="239.2" cy="59.8" r="3.2" fill="#1d232a"/>
+<circle cx="470.5" cy="34.8" r="3.2" fill="#1d232a"/>
+<text x="231.2" y="52.8" font-size="11.5" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">290</text>
+<text x="476.5" y="49.8" font-size="11.5" fill="#1d232a" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">330</text>
+<text transform="translate(142.4,99.8) rotate(-22.5)" y="-7" font-size="11.5" font-weight="500" fill="#1d232a" text-anchor="middle">üst sınır eğrisi</text>
+<text transform="translate(151.8,292.3) rotate(-30.4)" y="15" font-size="11.5" font-weight="500" fill="#1d232a" text-anchor="middle">alt sınır eğrisi</text>
+<text transform="translate(395.5,72.2) rotate(-26.6)" y="-6" font-size="11.5" font-weight="500" fill="#4a525c" text-anchor="middle">orta çizgi (σ = σ<tspan font-size='8.5' dy='2'>m</tspan><tspan dy='-2'>)</tspan></text>
+<text x="223.0" y="206.6" font-size="12" font-style="italic" fill="#5b6b80" text-anchor="middle">güvenli bölge (bant)</text>
+<text x="310.0" y="27.8" font-size="11" fill="#1d232a">akmada kesilir (330)</text>
+<text x="257.5" y="68.8" font-size="11" fill="#6b7480">titreşimli</text>
+<text x="66.0" y="149.8" font-size="11" fill="#6b7480">σ<tspan font-size="8.5" dy="2">eD</tspan><tspan dy="-2"> = 170</tspan></text>
+<text x="66.0" y="363.2" font-size="11" fill="#6b7480" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">−σ<tspan font-size="8.5" dy="2">eD</tspan><tspan dy="-2"> = −170</tspan></text>
+<text x="518.0" y="38.8" font-size="11" fill="#6b7480">bant burada</text>
+<text x="518.0" y="52.8" font-size="11" fill="#6b7480">kapanıyor</text>
+<text x="518.0" y="66.8" font-size="11" fill="#6b7480">(σ<tspan font-size="8.5" dy="2">ed</tspan><tspan dy="-2">' = 0)</tspan></text>
+</svg></figure>
+<p>Diyagram hocanın PDF'indeki St37 eğilme diyagramı: sol eksende <b>±170</b>, titreşimli noktada <b>290</b> (σ<sub>m</sub> = 145), akma <b>330</b>. Okumak için 4 hareket:</p>
+<ol class="moves">
+<li><span class="mv r">① sağa</span> Yatay eksende σ<sub>vm</sub>'ye git (statik kısım).</li>
+<li><span class="mv k">② orta</span> Yukarı çık, kesik 45° çizgisine değ. Orta = σ<sub>vm</sub>.</li>
+<li><span class="mv r">③ üst</span> Devam et, üst eğriye değ.</li>
+<li><span class="mv r">④ alt</span> Aşağı in, alt eğriye değ.</li>
+</ol>
+<p class="calc"><b>σ<sub>ed</sub>' = üst − orta</b> <span class="chk">kontrol: orta − alt de aynı çıkmalı · formülle (σ<sub>m</sub> ≤ 193 iken): σ<sub>ed</sub>' = 170 − 0,17·σ<sub>m</sub></span></p>
+
+<h2>4. Her örnekte aynı 6 adım</h2>
+<ol class="recipe">
+<li><b>Hangisi var?</b> Çekme, kayma, eğilme: kuvvetin yönüne ve koluna bak.</li>
+<li><b>Statik gerilmeler</b> (8000 N) → σ<sub>vm</sub> = √(σ² + 3τ²)</li>
+<li><b>Dinamik gerilmeler</b> (±2000 N) → σ<sub>vg</sub> (statiğin dörtte biri)</li>
+<li><b>Statik kontrol:</b> σ<sub>vm</sub> ≤ σ<sub>kem</sub> = 136</li>
+<li><b>Smith:</b> σ<sub>vm</sub> ile diyagrama gir → σ<sub>ed</sub>' = üst − orta</li>
+<li><b>Dinamik kontrol:</b> σ<sub>kem,D</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>ed</sub>' = 0,336·σ<sub>ed</sub>' → σ<sub>vg</sub> ≤ σ<sub>kem,D</sub> ise emniyetli. Kaç kat emniyetli: S = σ<sub>kem,D</sub> / σ<sub>vg</sub></li>
+</ol>
+</section>
+
+
+<section class="ex">
+<h2>5. Örnek 1: Aşağı doğru kuvvet (kol 80 mm)</h2>
+<div class="q"><b>Soru:</b> Parçaya, dikişten 80 mm uzakta, dikey olarak aşağı doğru F = 8000 ± 2000 N etki ediyor. Dikiş emniyetli midir? (20×60 St37 parça, çepeçevre a = 6 mm köşe dikişi, 1. kalite.)</div>
+<div class="row">
+<div class="col-fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 170" width="330" height="170" font-family="Inter, sans-serif">
+<defs><marker id="faasagi" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#9aa3ad" stroke-width="1.2"/></pattern></defs>
+<rect x="12" y="20" width="16" height="130" fill="url(#hatch)" stroke="#9aa3ad"/>
+<rect x="28" y="45" width="7" height="70" fill="#1e8a4c"/>
+<rect x="35" y="45" width="200" height="70" fill="#f3f4f6" stroke="#1d232a" stroke-width="1.2"/>
+<line x1="20" y1="80.0" x2="318" y2="80.0" stroke="#6b7480" stroke-dasharray="6 3 1.5 3"/>
+<text x="44" y="75.0" font-size="10.5" fill="#6b7480">eksen</text>
+<text x="20" y="163" font-size="10.5" fill="#6b7480" text-anchor="middle">duvar</text>
+<text x="42" y="163" font-size="10.5" fill="#1e8a4c">dikiş</text>
+<line x1="225" y1="115" x2="225" y2="157" stroke="#c0392b" stroke-width="2.6" marker-end="url(#faasagi)"/>
+<text x="219" y="151" font-size="11.5" font-weight="600" fill="#c0392b" text-anchor="end">F = 8000 ± 2000 N</text>
+<line x1="35" y1="30" x2="225" y2="30" stroke="#1d232a" stroke-width="0.8"/>
+<line x1="35" y1="25" x2="35" y2="35" stroke="#1d232a" stroke-width="0.8"/><line x1="225" y1="25" x2="225" y2="35" stroke="#1d232a" stroke-width="0.8"/>
+<text x="130.0" y="24" font-size="11.5" fill="#1d232a" text-anchor="middle">kol = 80 mm</text>
+<circle cx="31.5" cy="45" r="6" fill="none" stroke="#c0392b" stroke-width="2"/>
+</svg></div>
+<div class="col-txt"><p><span class="st">Adım 1</span> <b>Hangisi var?</b> Kuvvet aşağı, yani dikişe <b>paralel</b>: dikişi keser (<b>kayma var</b>). Duvardan 80 mm uzakta olduğu için dikişi eğer (<b>eğilme var</b>, kol 80). Dikişi çekmiyor (<b>çekme yok</b>). En çok zorlanan yer <b>üst lif</b> (çekilen taraf).</p></div>
+</div>
+<div class="row two">
+<div><p class="lbl"><b><span class="st">Adım 2</span> Statik (F = 8000 N) → σ<sub>vm</sub></b></p><ul class="tight"><li>Kayma: τ = 8000 / 720 = <b>11,11</b> N/mm²</li><li>Moment: M = 8000 · 80 = <b>640 000</b> Nmm</li><li>Eğilme: σ<sub>e</sub> = 640 000 / 13 280 = <b>48,19</b></li><li>Çekme yok, o yüzden σ = σ<sub>e</sub>.</li><li>Eşdeğer: σ<sub>v</sub> = √(48,19² + 3·11,11²) = <b>51,9</b> N/mm²</li></ul></div>
+<div><p class="lbl"><b><span class="st">Adım 3</span> Dinamik (F = ±2000 N) → σ<sub>vg</sub></b></p><ul class="tight"><li>Kayma: τ = 2000 / 720 = <b>2,78</b> N/mm²</li><li>Moment: M = 2000 · 80 = <b>160 000</b> Nmm</li><li>Eğilme: σ<sub>e</sub> = 160 000 / 13 280 = <b>12,05</b></li><li>Çekme yok, o yüzden σ = σ<sub>e</sub>.</li><li>Eşdeğer: σ<sub>v</sub> = √(12,05² + 3·2,78²) = <b>13,0</b> N/mm²</li></ul></div>
+</div>
+<p class="sumline">Sonuç: <b>σ<sub>vm</sub> = 51,9</b> (statik, ortalama) · <b>σ<sub>vg</sub> = 13,0</b> (dinamik, genlik). Kontrol: dinamik = statik / 4.</p>
+<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136. &nbsp; 51,9 &lt; 136 ✓</p>
+<p><span class="st">Adım 5</span> <b>Smith diyagramı</b> (diyagrama σ<sub>vm</sub> = 51,9 ile gir):</p>
+<figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>
+<line x1="120.5" y1="16.0" x2="120.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="183.0" y1="16.0" x2="183.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="245.5" y1="16.0" x2="245.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="308.0" y1="16.0" x2="308.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="370.5" y1="16.0" x2="370.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="433.0" y1="16.0" x2="433.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="495.5" y1="16.0" x2="495.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="366.0" x2="508.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="334.8" x2="508.0" y2="334.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="303.5" x2="508.0" y2="303.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="272.2" x2="508.0" y2="272.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="209.8" x2="508.0" y2="209.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="178.5" x2="508.0" y2="178.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="147.2" x2="508.0" y2="147.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="116.0" x2="508.0" y2="116.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="84.8" x2="508.0" y2="84.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="53.5" x2="508.0" y2="53.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="22.2" x2="508.0" y2="22.2" stroke="#e7e9ec" stroke-width="1"/>
+<polygon points="58.0,134.8 299.7,34.8 470.5,34.8 470.5,34.8 299.7,205.6 58.0,347.2" fill="#eef2f7"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#1d232a" stroke-width="1.3"/>
+<line x1="58.0" y1="366.0" x2="58.0" y2="16.0" stroke="#1d232a" stroke-width="1.3"/>
+<text x="183.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">100</text>
+<text x="308.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">200</text>
+<text x="433.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">300</text>
+<text x="508.0" y="270.0" font-size="12" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">σ<tspan font-size="9" dy="3">m</tspan><tspan dy="-3"> (N/mm²)</tspan></text>
+<text x="51.0" y="370.0" font-size="11" fill="#6b7480" text-anchor="end">−200</text>
+<text x="51.0" y="307.5" font-size="11" fill="#6b7480" text-anchor="end">−100</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text x="51.0" y="182.5" font-size="11" fill="#6b7480" text-anchor="end">100</text>
+<text x="51.0" y="120.0" font-size="11" fill="#6b7480" text-anchor="end">200</text>
+<text x="51.0" y="57.5" font-size="11" fill="#6b7480" text-anchor="end">300</text>
+<text x="51.0" y="138.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">170</text>
+<text x="51.0" y="351.2" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">−170</text>
+<text x="51.0" y="38.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">330</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text transform="translate(14,191.0) rotate(-90)" font-size="12" fill="#1d232a" text-anchor="middle">gerilme σ (N/mm²)</text>
+<line x1="58.0" y1="241.0" x2="495.5" y2="22.2" stroke="#7a828c" stroke-width="1.3" stroke-dasharray="7 3 1.5 3"/>
+<polyline points="58.0,134.8 299.7,34.8 470.5,34.8" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<polyline points="470.5,34.8 299.7,205.6 58.0,347.2" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="58.0" cy="134.8" r="3.2" fill="#1d232a"/>
+<circle cx="58.0" cy="347.2" r="3.2" fill="#1d232a"/>
+<circle cx="239.2" cy="59.8" r="3.2" fill="#1d232a"/>
+<circle cx="470.5" cy="34.8" r="3.2" fill="#1d232a"/>
+<text x="231.2" y="52.8" font-size="11.5" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">290</text>
+<text x="476.5" y="49.8" font-size="11.5" fill="#1d232a" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">330</text>
+<line x1="59.0" y1="241.0" x2="122.9" y2="241.0" stroke="#c0392b" stroke-width="3.2" marker-end="url(#ar)"/>
+<line x1="122.9" y1="309.2" x2="122.9" y2="107.9" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="122.9" y1="208.6" x2="516.0" y2="208.6" stroke="#1e8a4c" stroke-width="1.4"/>
+<line x1="122.9" y1="107.9" x2="516.0" y2="107.9" stroke="#1e8a4c" stroke-width="1.4"/>
+<line x1="524.0" y1="206.6" x2="524.0" y2="109.9" stroke="#1e8a4c" stroke-width="1.6" marker-start="url(#ag)" marker-end="url(#ag)"/>
+<text x="532.0" y="163.2" font-size="14" font-weight="700" fill="#1e8a4c">σ<tspan font-size="10" dy="3">ed</tspan><tspan dy="-3">' ≈ 161,1</tspan></text>
+<text x="532.0" y="101.9" font-size="12" font-weight="600" fill="#c0392b">③ üst ≈ 213</text>
+<text x="532.0" y="224.6" font-size="12" font-weight="600" fill="#1d232a">② orta = 51,9</text>
+<line x1="122.9" y1="216.7" x2="122.9" y2="200.4" stroke="#2563eb" stroke-width="7" stroke-linecap="butt" opacity="0.9"/>
+<circle cx="122.9" cy="208.6" r="4" fill="#ffffff" stroke="#1d232a" stroke-width="2"/>
+<circle cx="122.9" cy="107.9" r="4.3" fill="#c0392b"/>
+<circle cx="122.9" cy="309.2" r="4.3" fill="#c0392b"/>
+<text x="131.9" y="325.2" font-size="12" font-weight="600" fill="#c0392b" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">④ alt ≈ −109</text>
+<text x="63.0" y="271.0" font-size="12" font-weight="600" fill="#c0392b" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">① sağa git: σ<tspan font-size="9" dy="3">m</tspan><tspan dy="-3"> = 51,9</tspan></text>
+</svg><div class="legend"><span><span class="lg-line" style="background:#c0392b"></span><span>okuma yolu (sağa → yukarı)</span></span><span><span class="lg-line" style="background:#1e8a4c"></span><span>σ<sub>ed</sub>' (orta ile üst arası)</span></span><span><span class="lg-bar" style="background:#2563eb"></span><span>senin gerilmen: σ<sub>vm</sub> ± σ<sub>vg</sub></span></span><span><span class="lg-box"></span><span>güvenli bant</span></span></div></figure>
+<p class="calc">① sağa 51,9 → ② orta 51,9 → ③ üst ≈ 213 → ④ alt ≈ −109 &nbsp;⇒&nbsp; σ<sub>ed</sub>' = üst − orta = 213 − 51,9 = <b>161,1</b></p>
+<p><span class="st">Adım 6</span> <b>Dinamik kontrol (dikiş faktörleriyle):</b></p>
+<p class="calc">σ<sub>kem,D</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>ed</sub>' = 0,42 · 1 · 0,8 · 161,1 = <b>54,1</b> N/mm²
+<span class="chk">σ<sub>vg</sub> = 13,0 &lt; 54,1 ✓ &nbsp;·&nbsp; kaç kat emniyetli: S = 54,1 / 13,0 = 4,2</span></p>
+<div class="verdict"><b>Karar:</b> Statik 51,9 &lt; 136 ve dinamik 13,0 &lt; 54,1 → dikiş <b>emniyetli</b> (S ≈ 4,2).</div>
+</section>
+
+
+<section class="ex">
+<h2>6. Örnek 2: Tam ortadan, sağa çeken kuvvet</h2>
+<div class="q"><b>Soru:</b> Kuvvet tam eksenden geçiyor, yatay, duvardan uzağa: F = 8000 ± 2000 N. Dikiş emniyetli midir? (20×60 St37 parça, çepeçevre a = 6 mm köşe dikişi, 1. kalite.)</div>
+<div class="row">
+<div class="col-fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 170" width="330" height="170" font-family="Inter, sans-serif">
+<defs><marker id="faorta" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#9aa3ad" stroke-width="1.2"/></pattern></defs>
+<rect x="12" y="20" width="16" height="130" fill="url(#hatch)" stroke="#9aa3ad"/>
+<rect x="28" y="45" width="7" height="70" fill="#1e8a4c"/>
+<rect x="35" y="45" width="200" height="70" fill="#f3f4f6" stroke="#1d232a" stroke-width="1.2"/>
+<line x1="20" y1="80.0" x2="318" y2="80.0" stroke="#6b7480" stroke-dasharray="6 3 1.5 3"/>
+<text x="44" y="75.0" font-size="10.5" fill="#6b7480">eksen</text>
+<text x="20" y="163" font-size="10.5" fill="#6b7480" text-anchor="middle">duvar</text>
+<text x="42" y="163" font-size="10.5" fill="#1e8a4c">dikiş</text>
+<line x1="235" y1="80.0" x2="300" y2="80.0" stroke="#c0392b" stroke-width="2.6" marker-end="url(#faorta)"/>
+<text x="318" y="37" font-size="11.5" font-weight="600" fill="#c0392b" text-anchor="end">F = 8000 ± 2000 N</text>
+<text x="318" y="98.0" font-size="10.5" fill="#6b7480" text-anchor="end">e = 0</text>
+<rect x="25" y="42" width="13" height="76" fill="none" stroke="#c0392b" stroke-width="1.6" rx="3"/>
+</svg></div>
+<div class="col-txt"><p><span class="st">Adım 1</span> <b>Hangisi var?</b> Kuvvet dikişe <b>dik</b>: dikişi çeker (<b>çekme var</b>). Paralel bileşen yok (<b>kayma yok</b>). Tam eksenden geçtiği için kol sıfır (<b>eğilme yok</b>). 80 mm bu soruda hiç kullanılmaz. Bütün dikiş eşit zorlanır.</p></div>
+</div>
+<div class="row two">
+<div><p class="lbl"><b><span class="st">Adım 2</span> Statik (F = 8000 N) → σ<sub>vm</sub></b></p><ul class="tight"><li>Çekme: σ = 8000 / 960 = <b>8,33</b> N/mm²</li><li>Kayma ve eğilme yok, o yüzden σ<sub>v</sub> = σ = <b>8,33</b> N/mm²</li></ul></div>
+<div><p class="lbl"><b><span class="st">Adım 3</span> Dinamik (F = ±2000 N) → σ<sub>vg</sub></b></p><ul class="tight"><li>Çekme: σ = 2000 / 960 = <b>2,08</b> N/mm²</li><li>Kayma ve eğilme yok, o yüzden σ<sub>v</sub> = σ = <b>2,08</b> N/mm²</li></ul></div>
+</div>
+<p class="sumline">Sonuç: <b>σ<sub>vm</sub> = 8,33</b> (statik, ortalama) · <b>σ<sub>vg</sub> = 2,08</b> (dinamik, genlik). Kontrol: dinamik = statik / 4.</p>
+<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136. &nbsp; 8,33 &lt; 136 ✓</p>
+<p><span class="st">Adım 5</span> <b>Smith diyagramı</b> (diyagrama σ<sub>vm</sub> = 8,33 ile gir):</p>
+<figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>
+<line x1="120.5" y1="16.0" x2="120.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="183.0" y1="16.0" x2="183.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="245.5" y1="16.0" x2="245.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="308.0" y1="16.0" x2="308.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="370.5" y1="16.0" x2="370.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="433.0" y1="16.0" x2="433.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="495.5" y1="16.0" x2="495.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="366.0" x2="508.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="334.8" x2="508.0" y2="334.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="303.5" x2="508.0" y2="303.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="272.2" x2="508.0" y2="272.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="209.8" x2="508.0" y2="209.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="178.5" x2="508.0" y2="178.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="147.2" x2="508.0" y2="147.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="116.0" x2="508.0" y2="116.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="84.8" x2="508.0" y2="84.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="53.5" x2="508.0" y2="53.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="22.2" x2="508.0" y2="22.2" stroke="#e7e9ec" stroke-width="1"/>
+<polygon points="58.0,134.8 299.7,34.8 470.5,34.8 470.5,34.8 299.7,205.6 58.0,347.2" fill="#eef2f7"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#1d232a" stroke-width="1.3"/>
+<line x1="58.0" y1="366.0" x2="58.0" y2="16.0" stroke="#1d232a" stroke-width="1.3"/>
+<text x="183.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">100</text>
+<text x="308.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">200</text>
+<text x="433.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">300</text>
+<text x="508.0" y="270.0" font-size="12" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">σ<tspan font-size="9" dy="3">m</tspan><tspan dy="-3"> (N/mm²)</tspan></text>
+<text x="51.0" y="370.0" font-size="11" fill="#6b7480" text-anchor="end">−200</text>
+<text x="51.0" y="307.5" font-size="11" fill="#6b7480" text-anchor="end">−100</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text x="51.0" y="182.5" font-size="11" fill="#6b7480" text-anchor="end">100</text>
+<text x="51.0" y="120.0" font-size="11" fill="#6b7480" text-anchor="end">200</text>
+<text x="51.0" y="57.5" font-size="11" fill="#6b7480" text-anchor="end">300</text>
+<text x="51.0" y="138.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">170</text>
+<text x="51.0" y="351.2" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">−170</text>
+<text x="51.0" y="38.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">330</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text transform="translate(14,191.0) rotate(-90)" font-size="12" fill="#1d232a" text-anchor="middle">gerilme σ (N/mm²)</text>
+<line x1="58.0" y1="241.0" x2="495.5" y2="22.2" stroke="#7a828c" stroke-width="1.3" stroke-dasharray="7 3 1.5 3"/>
+<polyline points="58.0,134.8 299.7,34.8 470.5,34.8" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<polyline points="470.5,34.8 299.7,205.6 58.0,347.2" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="58.0" cy="134.8" r="3.2" fill="#1d232a"/>
+<circle cx="58.0" cy="347.2" r="3.2" fill="#1d232a"/>
+<circle cx="239.2" cy="59.8" r="3.2" fill="#1d232a"/>
+<circle cx="470.5" cy="34.8" r="3.2" fill="#1d232a"/>
+<text x="231.2" y="52.8" font-size="11.5" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">290</text>
+<text x="476.5" y="49.8" font-size="11.5" fill="#1d232a" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">330</text>
+<line x1="59.0" y1="241.0" x2="68.4" y2="241.0" stroke="#c0392b" stroke-width="3.2" marker-end="url(#ar)"/>
+<line x1="68.4" y1="341.1" x2="68.4" y2="130.4" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="68.4" y1="235.8" x2="516.0" y2="235.8" stroke="#1e8a4c" stroke-width="1.4"/>
+<line x1="68.4" y1="130.4" x2="516.0" y2="130.4" stroke="#1e8a4c" stroke-width="1.4"/>
+<line x1="524.0" y1="233.8" x2="524.0" y2="132.4" stroke="#1e8a4c" stroke-width="1.6" marker-start="url(#ag)" marker-end="url(#ag)"/>
+<text x="532.0" y="188.1" font-size="14" font-weight="700" fill="#1e8a4c">σ<tspan font-size="10" dy="3">ed</tspan><tspan dy="-3">' ≈ 168,7</tspan></text>
+<text x="532.0" y="124.4" font-size="12" font-weight="600" fill="#c0392b">③ üst ≈ 177</text>
+<text x="532.0" y="251.8" font-size="12" font-weight="600" fill="#1d232a">② orta = 8,33</text>
+<line x1="68.4" y1="237.1" x2="68.4" y2="234.5" stroke="#2563eb" stroke-width="7" stroke-linecap="butt" opacity="0.9"/>
+<circle cx="68.4" cy="235.8" r="4" fill="#ffffff" stroke="#1d232a" stroke-width="2"/>
+<circle cx="68.4" cy="130.4" r="4.3" fill="#c0392b"/>
+<circle cx="68.4" cy="341.1" r="4.3" fill="#c0392b"/>
+<text x="77.4" y="357.1" font-size="12" font-weight="600" fill="#c0392b" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">④ alt ≈ −160</text>
+<text x="63.0" y="271.0" font-size="12" font-weight="600" fill="#c0392b" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">① sağa git: σ<tspan font-size="9" dy="3">m</tspan><tspan dy="-3"> = 8,33</tspan></text>
+</svg><div class="legend"><span><span class="lg-line" style="background:#c0392b"></span><span>okuma yolu (sağa → yukarı)</span></span><span><span class="lg-line" style="background:#1e8a4c"></span><span>σ<sub>ed</sub>' (orta ile üst arası)</span></span><span><span class="lg-bar" style="background:#2563eb"></span><span>senin gerilmen: σ<sub>vm</sub> ± σ<sub>vg</sub></span></span><span><span class="lg-box"></span><span>güvenli bant</span></span></div></figure>
+<p class="calc">① sağa 8,33 → ② orta 8,33 → ③ üst ≈ 177 → ④ alt ≈ −160 &nbsp;⇒&nbsp; σ<sub>ed</sub>' = üst − orta = 177 − 8,33 = <b>168,7</b></p>
+<p><span class="st">Adım 6</span> <b>Dinamik kontrol (dikiş faktörleriyle):</b></p>
+<p class="calc">σ<sub>kem,D</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>ed</sub>' = 0,42 · 1 · 0,8 · 168,7 = <b>56,7</b> N/mm²
+<span class="chk">σ<sub>vg</sub> = 2,08 &lt; 56,7 ✓ &nbsp;·&nbsp; kaç kat emniyetli: S = 56,7 / 2,08 = 27,3</span></p>
+<div class="verdict"><b>Karar:</b> Statik 8,33 &lt; 136 ve dinamik 2,08 &lt; 56,7 → dikiş <b>emniyetli</b> (S ≈ 27,3).</div>
+</section>
+
+
+<section class="ex">
+<h2>7. Örnek 3: Eksenin 20 mm üstünden çeken kuvvet</h2>
+<div class="q"><b>Soru:</b> Yatay F = 8000 ± 2000 N, duvardan uzağa. Kuvvet çizgisi eksenin 20 mm üstünden geçiyor (e = 20 mm). Dikiş emniyetli midir? (20×60 St37 parça, çepeçevre a = 6 mm köşe dikişi, 1. kalite.)</div>
+<div class="row">
+<div class="col-fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 170" width="330" height="170" font-family="Inter, sans-serif">
+<defs><marker id="faust" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#9aa3ad" stroke-width="1.2"/></pattern></defs>
+<rect x="12" y="20" width="16" height="130" fill="url(#hatch)" stroke="#9aa3ad"/>
+<rect x="28" y="45" width="7" height="70" fill="#1e8a4c"/>
+<rect x="35" y="45" width="200" height="70" fill="#f3f4f6" stroke="#1d232a" stroke-width="1.2"/>
+<line x1="20" y1="80.0" x2="318" y2="80.0" stroke="#6b7480" stroke-dasharray="6 3 1.5 3"/>
+<text x="44" y="75.0" font-size="10.5" fill="#6b7480">eksen</text>
+<text x="20" y="163" font-size="10.5" fill="#6b7480" text-anchor="middle">duvar</text>
+<text x="42" y="163" font-size="10.5" fill="#1e8a4c">dikiş</text>
+<line x1="235" y1="56.0" x2="300" y2="56.0" stroke="#c0392b" stroke-width="2.6" marker-end="url(#faust)"/>
+<text x="318" y="37" font-size="11.5" font-weight="600" fill="#c0392b" text-anchor="end">F = 8000 ± 2000 N</text>
+<line x1="250" y1="80.0" x2="250" y2="56.0" stroke="#1d232a" stroke-width="0.8"/>
+<text x="256" y="72.0" font-size="11" fill="#1d232a">e = 20 mm</text>
+<circle cx="31.5" cy="45" r="6" fill="none" stroke="#c0392b" stroke-width="2"/>
+</svg></div>
+<div class="col-txt"><p><span class="st">Adım 1</span> <b>Hangisi var?</b> Yatay kuvvet: <b>çekme var</b>, <b>kayma yok</b>. Kuvvet eksenden 20 mm kaçık: <b>eğilme var</b>, kol <b>e = 20</b> (80 değil!). Kuvvet yukarıdan çektiği için en çok zorlanan yer <b>üst lif</b>: çekme ile eğilme orada toplanır.</p></div>
+</div>
+<div class="row two">
+<div><p class="lbl"><b><span class="st">Adım 2</span> Statik (F = 8000 N) → σ<sub>vm</sub></b></p><ul class="tight"><li>Çekme: σ<sub>ç</sub> = 8000 / 960 = <b>8,33</b></li><li>Moment: M = 8000 · 20 = <b>160 000</b> Nmm (kol 20)</li><li>Eğilme: σ<sub>e</sub> = 160 000 / 13 280 = <b>12,05</b></li><li>Üst lif (ikisi aynı yönde, toplanır): σ = 8,33 + 12,05 = <b>20,4</b> N/mm²</li><li>Kayma yok, o yüzden σ<sub>v</sub> = σ = <b>20,4</b></li></ul></div>
+<div><p class="lbl"><b><span class="st">Adım 3</span> Dinamik (F = ±2000 N) → σ<sub>vg</sub></b></p><ul class="tight"><li>Çekme: σ<sub>ç</sub> = 2000 / 960 = <b>2,08</b></li><li>Moment: M = 2000 · 20 = <b>40 000</b> Nmm (kol 20)</li><li>Eğilme: σ<sub>e</sub> = 40 000 / 13 280 = <b>3,01</b></li><li>Üst lif (ikisi aynı yönde, toplanır): σ = 2,08 + 3,01 = <b>5,1</b> N/mm²</li><li>Kayma yok, o yüzden σ<sub>v</sub> = σ = <b>5,1</b></li></ul></div>
+</div>
+<p class="sumline">Sonuç: <b>σ<sub>vm</sub> = 20,4</b> (statik, ortalama) · <b>σ<sub>vg</sub> = 5,1</b> (dinamik, genlik). Kontrol: dinamik = statik / 4.</p>
+<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136. &nbsp; 20,4 &lt; 136 ✓</p>
+<p><span class="st">Adım 5</span> <b>Smith diyagramı</b> (diyagrama σ<sub>vm</sub> = 20,4 ile gir):</p>
+<figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>
+<line x1="120.5" y1="16.0" x2="120.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="183.0" y1="16.0" x2="183.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="245.5" y1="16.0" x2="245.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="308.0" y1="16.0" x2="308.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="370.5" y1="16.0" x2="370.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="433.0" y1="16.0" x2="433.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="495.5" y1="16.0" x2="495.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="366.0" x2="508.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="334.8" x2="508.0" y2="334.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="303.5" x2="508.0" y2="303.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="272.2" x2="508.0" y2="272.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="209.8" x2="508.0" y2="209.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="178.5" x2="508.0" y2="178.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="147.2" x2="508.0" y2="147.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="116.0" x2="508.0" y2="116.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="84.8" x2="508.0" y2="84.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="53.5" x2="508.0" y2="53.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="22.2" x2="508.0" y2="22.2" stroke="#e7e9ec" stroke-width="1"/>
+<polygon points="58.0,134.8 299.7,34.8 470.5,34.8 470.5,34.8 299.7,205.6 58.0,347.2" fill="#eef2f7"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#1d232a" stroke-width="1.3"/>
+<line x1="58.0" y1="366.0" x2="58.0" y2="16.0" stroke="#1d232a" stroke-width="1.3"/>
+<text x="183.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">100</text>
+<text x="308.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">200</text>
+<text x="433.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">300</text>
+<text x="508.0" y="270.0" font-size="12" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">σ<tspan font-size="9" dy="3">m</tspan><tspan dy="-3"> (N/mm²)</tspan></text>
+<text x="51.0" y="370.0" font-size="11" fill="#6b7480" text-anchor="end">−200</text>
+<text x="51.0" y="307.5" font-size="11" fill="#6b7480" text-anchor="end">−100</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text x="51.0" y="182.5" font-size="11" fill="#6b7480" text-anchor="end">100</text>
+<text x="51.0" y="120.0" font-size="11" fill="#6b7480" text-anchor="end">200</text>
+<text x="51.0" y="57.5" font-size="11" fill="#6b7480" text-anchor="end">300</text>
+<text x="51.0" y="138.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">170</text>
+<text x="51.0" y="351.2" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">−170</text>
+<text x="51.0" y="38.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">330</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text transform="translate(14,191.0) rotate(-90)" font-size="12" fill="#1d232a" text-anchor="middle">gerilme σ (N/mm²)</text>
+<line x1="58.0" y1="241.0" x2="495.5" y2="22.2" stroke="#7a828c" stroke-width="1.3" stroke-dasharray="7 3 1.5 3"/>
+<polyline points="58.0,134.8 299.7,34.8 470.5,34.8" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<polyline points="470.5,34.8 299.7,205.6 58.0,347.2" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="58.0" cy="134.8" r="3.2" fill="#1d232a"/>
+<circle cx="58.0" cy="347.2" r="3.2" fill="#1d232a"/>
+<circle cx="239.2" cy="59.8" r="3.2" fill="#1d232a"/>
+<circle cx="470.5" cy="34.8" r="3.2" fill="#1d232a"/>
+<text x="231.2" y="52.8" font-size="11.5" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">290</text>
+<text x="476.5" y="49.8" font-size="11.5" fill="#1d232a" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">330</text>
+<line x1="59.0" y1="241.0" x2="83.5" y2="241.0" stroke="#c0392b" stroke-width="3.2" marker-end="url(#ar)"/>
+<line x1="83.5" y1="332.3" x2="83.5" y2="124.2" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="83.5" y1="228.2" x2="516.0" y2="228.2" stroke="#1e8a4c" stroke-width="1.4"/>
+<line x1="83.5" y1="124.2" x2="516.0" y2="124.2" stroke="#1e8a4c" stroke-width="1.4"/>
+<line x1="524.0" y1="226.2" x2="524.0" y2="126.2" stroke="#1e8a4c" stroke-width="1.6" marker-start="url(#ag)" marker-end="url(#ag)"/>
+<text x="532.0" y="181.2" font-size="14" font-weight="700" fill="#1e8a4c">σ<tspan font-size="10" dy="3">ed</tspan><tspan dy="-3">' ≈ 166,6</tspan></text>
+<text x="532.0" y="118.2" font-size="12" font-weight="600" fill="#c0392b">③ üst ≈ 187</text>
+<text x="532.0" y="244.2" font-size="12" font-weight="600" fill="#1d232a">② orta = 20,4</text>
+<line x1="83.5" y1="231.4" x2="83.5" y2="225.1" stroke="#2563eb" stroke-width="7" stroke-linecap="butt" opacity="0.9"/>
+<circle cx="83.5" cy="228.2" r="4" fill="#ffffff" stroke="#1d232a" stroke-width="2"/>
+<circle cx="83.5" cy="124.2" r="4.3" fill="#c0392b"/>
+<circle cx="83.5" cy="332.3" r="4.3" fill="#c0392b"/>
+<text x="92.5" y="348.3" font-size="12" font-weight="600" fill="#c0392b" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">④ alt ≈ −146</text>
+<text x="63.0" y="271.0" font-size="12" font-weight="600" fill="#c0392b" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">① sağa git: σ<tspan font-size="9" dy="3">m</tspan><tspan dy="-3"> = 20,4</tspan></text>
+</svg><div class="legend"><span><span class="lg-line" style="background:#c0392b"></span><span>okuma yolu (sağa → yukarı)</span></span><span><span class="lg-line" style="background:#1e8a4c"></span><span>σ<sub>ed</sub>' (orta ile üst arası)</span></span><span><span class="lg-bar" style="background:#2563eb"></span><span>senin gerilmen: σ<sub>vm</sub> ± σ<sub>vg</sub></span></span><span><span class="lg-box"></span><span>güvenli bant</span></span></div></figure>
+<p class="calc">① sağa 20,4 → ② orta 20,4 → ③ üst ≈ 187 → ④ alt ≈ −146 &nbsp;⇒&nbsp; σ<sub>ed</sub>' = üst − orta = 187 − 20,4 = <b>166,6</b></p>
+<p><span class="st">Adım 6</span> <b>Dinamik kontrol (dikiş faktörleriyle):</b></p>
+<p class="calc">σ<sub>kem,D</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>ed</sub>' = 0,42 · 1 · 0,8 · 166,6 = <b>56,0</b> N/mm²
+<span class="chk">σ<sub>vg</sub> = 5,1 &lt; 56,0 ✓ &nbsp;·&nbsp; kaç kat emniyetli: S = 56,0 / 5,1 = 11,0</span></p>
+<div class="verdict"><b>Karar:</b> Statik 20,4 &lt; 136 ve dinamik 5,1 &lt; 56,0 → dikiş <b>emniyetli</b> (S ≈ 11,0).</div>
+</section>
+
+
+<section class="ex">
+<h2>8. Örnek 4: Eksenin 20 mm altından çeken kuvvet</h2>
+<div class="q"><b>Soru:</b> Örnek 3'ün aynısı, ama kuvvet çizgisi eksenin 20 mm altından geçiyor. F = 8000 ± 2000 N. Dikiş emniyetli midir? (20×60 St37 parça, çepeçevre a = 6 mm köşe dikişi, 1. kalite.)</div>
+<div class="row">
+<div class="col-fig"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 170" width="330" height="170" font-family="Inter, sans-serif">
+<defs><marker id="faalt" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#9aa3ad" stroke-width="1.2"/></pattern></defs>
+<rect x="12" y="20" width="16" height="130" fill="url(#hatch)" stroke="#9aa3ad"/>
+<rect x="28" y="45" width="7" height="70" fill="#1e8a4c"/>
+<rect x="35" y="45" width="200" height="70" fill="#f3f4f6" stroke="#1d232a" stroke-width="1.2"/>
+<line x1="20" y1="80.0" x2="318" y2="80.0" stroke="#6b7480" stroke-dasharray="6 3 1.5 3"/>
+<text x="44" y="75.0" font-size="10.5" fill="#6b7480">eksen</text>
+<text x="20" y="163" font-size="10.5" fill="#6b7480" text-anchor="middle">duvar</text>
+<text x="42" y="163" font-size="10.5" fill="#1e8a4c">dikiş</text>
+<line x1="235" y1="104.0" x2="300" y2="104.0" stroke="#c0392b" stroke-width="2.6" marker-end="url(#faalt)"/>
+<text x="318" y="135" font-size="11.5" font-weight="600" fill="#c0392b" text-anchor="end">F = 8000 ± 2000 N</text>
+<line x1="250" y1="80.0" x2="250" y2="104.0" stroke="#1d232a" stroke-width="0.8"/>
+<text x="256" y="96.0" font-size="11" fill="#1d232a">e = 20 mm</text>
+<circle cx="31.5" cy="115" r="6" fill="none" stroke="#c0392b" stroke-width="2"/>
+</svg></div>
+<div class="col-txt"><p><span class="st">Adım 1</span> <b>Hangisi var?</b> Örnek 3'ün ayna görüntüsü: <b>çekme var</b>, <b>kayma yok</b>, <b>eğilme var</b> (kol 20). Bu kez en çok zorlanan yer <b>alt lif</b>. Kesit simetrik olduğu için sayılar Örnek 3'le aynı çıkar.</p></div>
+</div>
+<div class="row two">
+<div><p class="lbl"><b><span class="st">Adım 2</span> Statik (F = 8000 N) → σ<sub>vm</sub></b></p><ul class="tight"><li>Çekme: σ<sub>ç</sub> = 8000 / 960 = <b>8,33</b></li><li>Moment: M = 8000 · 20 = <b>160 000</b> Nmm (kol 20)</li><li>Eğilme: σ<sub>e</sub> = 160 000 / 13 280 = <b>12,05</b></li><li>Alt lif (ikisi aynı yönde, toplanır): σ = 8,33 + 12,05 = <b>20,4</b> N/mm²</li><li>Kayma yok, o yüzden σ<sub>v</sub> = σ = <b>20,4</b></li></ul></div>
+<div><p class="lbl"><b><span class="st">Adım 3</span> Dinamik (F = ±2000 N) → σ<sub>vg</sub></b></p><ul class="tight"><li>Çekme: σ<sub>ç</sub> = 2000 / 960 = <b>2,08</b></li><li>Moment: M = 2000 · 20 = <b>40 000</b> Nmm (kol 20)</li><li>Eğilme: σ<sub>e</sub> = 40 000 / 13 280 = <b>3,01</b></li><li>Alt lif (ikisi aynı yönde, toplanır): σ = 2,08 + 3,01 = <b>5,1</b> N/mm²</li><li>Kayma yok, o yüzden σ<sub>v</sub> = σ = <b>5,1</b></li></ul></div>
+</div>
+<p class="sumline">Sonuç: <b>σ<sub>vm</sub> = 20,4</b> (statik, ortalama) · <b>σ<sub>vg</sub> = 5,1</b> (dinamik, genlik). Kontrol: dinamik = statik / 4.</p>
+<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136. &nbsp; 20,4 &lt; 136 ✓</p>
+<p><span class="st">Adım 5</span> <b>Smith diyagramı</b> (diyagrama σ<sub>vm</sub> = 20,4 ile gir):</p>
+<figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>
+<line x1="120.5" y1="16.0" x2="120.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="183.0" y1="16.0" x2="183.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="245.5" y1="16.0" x2="245.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="308.0" y1="16.0" x2="308.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="370.5" y1="16.0" x2="370.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="433.0" y1="16.0" x2="433.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="495.5" y1="16.0" x2="495.5" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="366.0" x2="508.0" y2="366.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="334.8" x2="508.0" y2="334.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="303.5" x2="508.0" y2="303.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="272.2" x2="508.0" y2="272.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="209.8" x2="508.0" y2="209.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="178.5" x2="508.0" y2="178.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="147.2" x2="508.0" y2="147.2" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="116.0" x2="508.0" y2="116.0" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="84.8" x2="508.0" y2="84.8" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="53.5" x2="508.0" y2="53.5" stroke="#e7e9ec" stroke-width="1"/>
+<line x1="58.0" y1="22.2" x2="508.0" y2="22.2" stroke="#e7e9ec" stroke-width="1"/>
+<polygon points="58.0,134.8 299.7,34.8 470.5,34.8 470.5,34.8 299.7,205.6 58.0,347.2" fill="#eef2f7"/>
+<line x1="58.0" y1="241.0" x2="508.0" y2="241.0" stroke="#1d232a" stroke-width="1.3"/>
+<line x1="58.0" y1="366.0" x2="58.0" y2="16.0" stroke="#1d232a" stroke-width="1.3"/>
+<text x="183.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">100</text>
+<text x="308.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">200</text>
+<text x="433.0" y="255.0" font-size="11" fill="#6b7480" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">300</text>
+<text x="508.0" y="270.0" font-size="12" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">σ<tspan font-size="9" dy="3">m</tspan><tspan dy="-3"> (N/mm²)</tspan></text>
+<text x="51.0" y="370.0" font-size="11" fill="#6b7480" text-anchor="end">−200</text>
+<text x="51.0" y="307.5" font-size="11" fill="#6b7480" text-anchor="end">−100</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text x="51.0" y="182.5" font-size="11" fill="#6b7480" text-anchor="end">100</text>
+<text x="51.0" y="120.0" font-size="11" fill="#6b7480" text-anchor="end">200</text>
+<text x="51.0" y="57.5" font-size="11" fill="#6b7480" text-anchor="end">300</text>
+<text x="51.0" y="138.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">170</text>
+<text x="51.0" y="351.2" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">−170</text>
+<text x="51.0" y="38.8" font-size="11.5" font-weight="600" fill="#1d232a" text-anchor="end">330</text>
+<text x="51.0" y="245.0" font-size="11" fill="#6b7480" text-anchor="end">0</text>
+<text transform="translate(14,191.0) rotate(-90)" font-size="12" fill="#1d232a" text-anchor="middle">gerilme σ (N/mm²)</text>
+<line x1="58.0" y1="241.0" x2="495.5" y2="22.2" stroke="#7a828c" stroke-width="1.3" stroke-dasharray="7 3 1.5 3"/>
+<polyline points="58.0,134.8 299.7,34.8 470.5,34.8" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<polyline points="470.5,34.8 299.7,205.6 58.0,347.2" fill="none" stroke="#1d232a" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="58.0" cy="134.8" r="3.2" fill="#1d232a"/>
+<circle cx="58.0" cy="347.2" r="3.2" fill="#1d232a"/>
+<circle cx="239.2" cy="59.8" r="3.2" fill="#1d232a"/>
+<circle cx="470.5" cy="34.8" r="3.2" fill="#1d232a"/>
+<text x="231.2" y="52.8" font-size="11.5" fill="#1d232a" text-anchor="end" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">290</text>
+<text x="476.5" y="49.8" font-size="11.5" fill="#1d232a" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">330</text>
+<line x1="59.0" y1="241.0" x2="83.5" y2="241.0" stroke="#c0392b" stroke-width="3.2" marker-end="url(#ar)"/>
+<line x1="83.5" y1="332.3" x2="83.5" y2="124.2" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="83.5" y1="228.2" x2="516.0" y2="228.2" stroke="#1e8a4c" stroke-width="1.4"/>
+<line x1="83.5" y1="124.2" x2="516.0" y2="124.2" stroke="#1e8a4c" stroke-width="1.4"/>
+<line x1="524.0" y1="226.2" x2="524.0" y2="126.2" stroke="#1e8a4c" stroke-width="1.6" marker-start="url(#ag)" marker-end="url(#ag)"/>
+<text x="532.0" y="181.2" font-size="14" font-weight="700" fill="#1e8a4c">σ<tspan font-size="10" dy="3">ed</tspan><tspan dy="-3">' ≈ 166,6</tspan></text>
+<text x="532.0" y="118.2" font-size="12" font-weight="600" fill="#c0392b">③ üst ≈ 187</text>
+<text x="532.0" y="244.2" font-size="12" font-weight="600" fill="#1d232a">② orta = 20,4</text>
+<line x1="83.5" y1="231.4" x2="83.5" y2="225.1" stroke="#2563eb" stroke-width="7" stroke-linecap="butt" opacity="0.9"/>
+<circle cx="83.5" cy="228.2" r="4" fill="#ffffff" stroke="#1d232a" stroke-width="2"/>
+<circle cx="83.5" cy="124.2" r="4.3" fill="#c0392b"/>
+<circle cx="83.5" cy="332.3" r="4.3" fill="#c0392b"/>
+<text x="92.5" y="348.3" font-size="12" font-weight="600" fill="#c0392b" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">④ alt ≈ −146</text>
+<text x="63.0" y="271.0" font-size="12" font-weight="600" fill="#c0392b" paint-order="stroke" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">① sağa git: σ<tspan font-size="9" dy="3">m</tspan><tspan dy="-3"> = 20,4</tspan></text>
+</svg><div class="legend"><span><span class="lg-line" style="background:#c0392b"></span><span>okuma yolu (sağa → yukarı)</span></span><span><span class="lg-line" style="background:#1e8a4c"></span><span>σ<sub>ed</sub>' (orta ile üst arası)</span></span><span><span class="lg-bar" style="background:#2563eb"></span><span>senin gerilmen: σ<sub>vm</sub> ± σ<sub>vg</sub></span></span><span><span class="lg-box"></span><span>güvenli bant</span></span></div></figure>
+<p class="calc">① sağa 20,4 → ② orta 20,4 → ③ üst ≈ 187 → ④ alt ≈ −146 &nbsp;⇒&nbsp; σ<sub>ed</sub>' = üst − orta = 187 − 20,4 = <b>166,6</b></p>
+<p><span class="st">Adım 6</span> <b>Dinamik kontrol (dikiş faktörleriyle):</b></p>
+<p class="calc">σ<sub>kem,D</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>ed</sub>' = 0,42 · 1 · 0,8 · 166,6 = <b>56,0</b> N/mm²
+<span class="chk">σ<sub>vg</sub> = 5,1 &lt; 56,0 ✓ &nbsp;·&nbsp; kaç kat emniyetli: S = 56,0 / 5,1 = 11,0</span></p>
+<div class="verdict"><b>Karar:</b> Statik 20,4 &lt; 136 ve dinamik 5,1 &lt; 56,0 → dikiş <b>emniyetli</b> (S ≈ 11,0).</div>
+</section>
+
+
+<section class="pb">
+<h2>9. Hoca faktörleri nasıl sorar? Kısa işlem soruları</h2>
+<p>Önce cevap sütununu kapat, kendin yap.</p>
+<table class="t quiz2">
+<tr><th>#</th><th>Soru</th><th>İşlem</th><th>Cevap</th></tr>
+<tr><td>1</td><td>1. kalite kaynakta v<sub>2</sub>?</td><td>eski sistem tablosu</td><td><b>1</b></td></tr>
+<tr><td>2</td><td>3. kalite kaynakta v<sub>2</sub>?</td><td>eski sistem tablosu</td><td><b>0,5</b></td></tr>
+<tr><td>3</td><td>Yeni sistem, sadece gözle kontrol edilmiş kaynak: v<sub>2</sub>?</td><td>yeni sistem tablosu</td><td><b>0,8</b></td></tr>
+<tr><td>4</td><td>Çelik, köşe (boğaz) kaynağı: v<sub>3</sub>?</td><td>her zorlanmada aynı</td><td><b>0,8</b></td></tr>
+<tr><td>5</td><td>Çelik alın kaynağı, çekme: v<sub>3</sub>? Kesme olsa?</td><td>alın satırları</td><td><b>1,0</b> · <b>0,8</b></td></tr>
+<tr><td>6</td><td>Statik yükte v<sub>1</sub>?</td><td>slayt: “statikte 1'dir”</td><td><b>1</b></td></tr>
+<tr><td>7</td><td>Tek taraflı düz köşe dikişi, çekme: v<sub>1</sub>?</td><td>tek taraflı · düz · 1. satır</td><td><b>0,3</b></td></tr>
+<tr><td>8</td><td>İki taraflı içbükey köşe dikişi, basma: v<sub>1</sub>?</td><td>iki taraflı · içbükey · 2. satır</td><td><b>0,7</b></td></tr>
+<tr><td>9</td><td>İki taraflı düz köşe dikişi, a = 6, l = 60: kaynak alanı?</td><td>2a·l = 2·6·60</td><td><b>720 mm²</b></td></tr>
+<tr><td>10</td><td>σ<sub>em</sub> = 170, 1. kalite köşe kaynağı, statik: σ<sub>kem</sub>?</td><td>1 · 1 · 0,8 · 170</td><td><b>136</b></td></tr>
+<tr><td>11</td><td>Aynı soru, 2. kalite kaynak olsa?</td><td>1 · 0,8 · 0,8 · 170</td><td><b>108,8</b></td></tr>
+<tr><td>12</td><td>Aynı soru, 3. kalite kaynak olsa?</td><td>1 · 0,5 · 0,8 · 170</td><td><b>68</b></td></tr>
+<tr><td>13</td><td>Dinamik, iki taraflı düz köşe, 1. kalite, σ<sub>ed</sub>' = 160: σ<sub>kem,D</sub>?</td><td>0,42 · 1 · 0,8 · 160</td><td><b>53,8</b></td></tr>
+<tr><td>14</td><td>Örnek 1'deki dikiş 2. kalite olsaydı dinamik sınır? Yine emniyetli mi?</td><td>0,42 · 0,8 · 0,8 · 161,1</td><td><b>43,3</b> · 13,0 &lt; 43,3, evet</td></tr>
+</table>
+<p class="small">Dikkat: kalite düşünce (v<sub>2</sub> küçülünce) hem statik hem dinamik sınır aynı oranda düşer. v<sub>1</sub> ise sadece dinamik sınırı etkiler, çünkü statikte 1'dir.</p>
+
+<h2>10. Dört örnek yan yana</h2>
+<table class="t sum2">
+<tr><th>Örnek</th><th>Kritik yer</th><th>σ<sub>vm</sub><br>(≤ 136)</th><th>σ<sub>vg</sub></th><th>üst</th><th>σ<sub>ed</sub>'</th><th>σ<sub>kem,D</sub></th><th>S</th><th>Sonuç</th></tr>
+<tr><td>1. Aşağı doğru kuvvet</td><td>üst lif</td><td>51,9</td><td>13,0</td><td>213</td><td>161,1</td><td>54,1</td><td>4,2</td><td>emniyetli</td></tr>
+<tr><td>2. Tam ortadan, sağa çeken kuvvet</td><td>her yer eşit</td><td>8,33</td><td>2,08</td><td>177</td><td>168,7</td><td>56,7</td><td>27,3</td><td>emniyetli</td></tr>
+<tr><td>3. Eksenin 20 mm üstünden çeken kuvvet</td><td>üst lif</td><td>20,4</td><td>5,1</td><td>187</td><td>166,6</td><td>56,0</td><td>11,0</td><td>emniyetli</td></tr>
+<tr><td>4. Eksenin 20 mm altından çeken kuvvet</td><td>alt lif</td><td>20,4</td><td>5,1</td><td>187</td><td>166,6</td><td>56,0</td><td>11,0</td><td>emniyetli</td></tr>
+</table>
+<p>Kuvvet hepsinde aynı (8000 ± 2000 N), ama gerilme yönden ve koldan değişiyor: en tehlikelisi aşağı doğru kuvvet (uzun kol 80 mm). σ<sub>ed</sub>' her örnekte 160–170 arası çıkıyor, çünkü σ<sub>vm</sub> küçük ve bandın geniş olduğu sol taraftayız.</p>
+
+<h2>11. Sınavda dikkat</h2>
+<ul class="tips">
+<li><b>v<sub>1</sub> statikte 1.</b> Tablodaki v<sub>1</sub> sadece dinamik (yorulma) kontrolünde kullanılır.</li>
+<li>Köşe (boğaz) kaynağında <b>v<sub>3</sub> = 0,8</b>, zorlanma ne olursa olsun. Alın kaynağında çekme, basma ve eğilme 1,0, kesme 0,8.</li>
+<li><b>1. kalite → v<sub>2</sub> = 1.</b> 2. kalite 0,8, 3. kalite 0,5.</li>
+<li>Diyagrama <b>σ<sub>vm</sub></b> ile girilir, <b>σ<sub>vg</sub></b> ile karşılaştırılır. Karıştırma.</li>
+<li><b>σ<sub>ed</sub>' = üst − orta.</b> Üst değerin kendisini yazma.</li>
+<li>Çekmede 960, kaymada 720. Eğilmede y = 36, W = 13 280.</li>
+<li>Kol: dikey kuvvette dikişe uzaklık (80), yatay kuvvette eksene uzaklık (e = 20). Ortadan geçen yatay kuvvette kol yok.</li>
+<li>Dikiş türü soruda yazar; v<sub>1</sub>'i o sütundan oku. Bu PDF'te iki taraflı düz köşe (0,42) aldım.</li>
+</ul>
+</section>
+
+</body></html>
