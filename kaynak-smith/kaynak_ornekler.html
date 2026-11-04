@@ -138,7 +138,7 @@ ul.tight li, ol.tight li { margin: 1px 0; }
 <tr><td><b>v<sub>1</sub></b> dikiş faktörü</td><td>Yorulmada gerilme yığılması (dikişin çentik etkisi). <b>Statikte 1.</b></td><td>statik <b>1</b> · dinamik <b>0,42</b></td><td>tablo: iki taraflı, düz köşe dikişi</td></tr>
 <tr><td><b>v<sub>2</sub></b> kalite faktörü</td><td>Kaynağın kalitesi</td><td><b>1</b></td><td>1. kalite</td></tr>
 <tr><td><b>v<sub>3</sub></b> gerilme faktörü</td><td>Dikiş türü ve zorlanma türü</td><td><b>0,8</b></td><td>çelik, köşe (boğaz) kaynağı, her zorlanma</td></tr>
-<tr><td><b>σ<sub>em</sub></b></td><td>Parçanın emniyet gerilmesi</td><td>statik <b>170</b> · dinamik <b>σ<sub>ed</sub>'</b></td><td>dinamikte Smith diyagramından okunur</td></tr>
+<tr><td><b>σ<sub>em</sub></b></td><td>Parçanın emniyet gerilmesi</td><td>statik <b>170</b> · dinamik <b>σ<sub>ed</sub>'</b></td><td>ikisi de Smith diyagramından: 170 sol eksenden, σ<sub>ed</sub>' σ<sub>vm</sub>'de okunur</td></tr>
 </table>
 
 <h3>v<sub>1</sub>: Köşe dikişleri tablosu (hocanın slaytından)</h3>
@@ -185,13 +185,13 @@ ul.tight li, ol.tight li { margin: 1px 0; }
 <div class="key">
 <p><b>Bütün örneklerde kullanacağımız iki sayı:</b></p>
 <ul class="tight">
-<li><b>Statik:</b> σ<sub>kem</sub> = 1 · 1 · 0,8 · 170 = <b>136 N/mm²</b>. Hocanın tahtadaki 136'sı tam bu: 136 / 0,8 = 170, yani parça için σ<sub>em</sub> = 170 alınmış.</li>
+<li><b>Statik:</b> σ<sub>kem</sub> = 1 · 1 · 0,8 · 170 = <b>136 N/mm²</b>. <b>170 nereden?</b> St37 Smith diyagramının sol ekseninden: σ<sub>m</sub> = 0'daki değer, σ<sub>eD</sub> = 170. Hocanın tahtadaki 136'sı ile birebir tutuyor (136 / 0,8 = 170). St44 olsaydı sol eksen 200 → 0,8 · 200 = 160 olurdu.</li>
 <li><b>Dinamik:</b> σ<sub>kem,D</sub> = 0,42 · 1 · 0,8 · σ<sub>ed</sub>' = <b>0,336 · σ<sub>ed</sub>'</b>. Burada σ<sub>em</sub> yerine Smith diyagramından okunan σ<sub>ed</sub>' girer.</li>
 </ul>
 </div>
 </section>
 
-<section>
+<section class="pb">
 <h2>3. Smith diyagramı: 30 saniyede hatırlatma</h2>
 <figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>
@@ -255,7 +255,7 @@ ul.tight li, ol.tight li { margin: 1px 0; }
 <text x="518.0" y="52.8" font-size="11" fill="#6b7480">kapanıyor</text>
 <text x="518.0" y="66.8" font-size="11" fill="#6b7480">(σ<tspan font-size="8.5" dy="2">ed</tspan><tspan dy="-2">' = 0)</tspan></text>
 </svg></figure>
-<p>Diyagram hocanın PDF'indeki St37 eğilme diyagramı: sol eksende <b>±170</b>, titreşimli noktada <b>290</b> (σ<sub>m</sub> = 145), akma <b>330</b>. Okumak için 4 hareket:</p>
+<p>Diyagram hocanın PDF'indeki St37 eğilme diyagramı: sol eksende <b>±170</b>, titreşimli noktada <b>290</b> (σ<sub>m</sub> = 145), akma <b>330</b>. Diyagramdan <b>iki sayı</b> alıyoruz: statik kontrol için <b>sol eksendeki 170</b> (σ<sub>em</sub>), dinamik kontrol için <b>σ<sub>ed</sub>'</b>. τ, σ ve σ<sub>v</sub>'yi ise hep formülle buluyoruz, diyagramdan değil. σ<sub>ed</sub>'yi okumak için 4 hareket:</p>
 <ol class="moves">
 <li><span class="mv r">① sağa</span> Yatay eksende σ<sub>vm</sub>'ye git (statik kısım).</li>
 <li><span class="mv k">② orta</span> Yukarı çık, kesik 45° çizgisine değ. Orta = σ<sub>vm</sub>.</li>
@@ -269,7 +269,7 @@ ul.tight li, ol.tight li { margin: 1px 0; }
 <li><b>Hangisi var?</b> Çekme, kayma, eğilme: kuvvetin yönüne ve koluna bak.</li>
 <li><b>Statik gerilmeler</b> (8000 N) → σ<sub>vm</sub> = √(σ² + 3τ²)</li>
 <li><b>Dinamik gerilmeler</b> (±2000 N) → σ<sub>vg</sub> (statiğin dörtte biri)</li>
-<li><b>Statik kontrol:</b> σ<sub>vm</sub> ≤ σ<sub>kem</sub> = 136</li>
+<li><b>Statik kontrol:</b> σ<sub>vm</sub> ≤ σ<sub>kem</sub> = 0,8 · 170 = 136 (170 diyagramın sol ekseni)</li>
 <li><b>Smith:</b> σ<sub>vm</sub> ile diyagrama gir → σ<sub>ed</sub>' = üst − orta</li>
 <li><b>Dinamik kontrol:</b> σ<sub>kem,D</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>ed</sub>' = 0,336·σ<sub>ed</sub>' → σ<sub>vg</sub> ≤ σ<sub>kem,D</sub> ise emniyetli. Kaç kat emniyetli: S = σ<sub>kem,D</sub> / σ<sub>vg</sub></li>
 </ol>
@@ -303,7 +303,7 @@ ul.tight li, ol.tight li { margin: 1px 0; }
 <div><p class="lbl"><b><span class="st">Adım 3</span> Dinamik (F = ±2000 N) → σ<sub>vg</sub></b></p><ul class="tight"><li>Kayma: τ = 2000 / 720 = <b>2,78</b> N/mm²</li><li>Moment: M = 2000 · 80 = <b>160 000</b> Nmm</li><li>Eğilme: σ<sub>e</sub> = 160 000 / 13 280 = <b>12,05</b></li><li>Çekme yok, o yüzden σ = σ<sub>e</sub>.</li><li>Eşdeğer: σ<sub>v</sub> = √(12,05² + 3·2,78²) = <b>13,0</b> N/mm²</li></ul></div>
 </div>
 <p class="sumline">Sonuç: <b>σ<sub>vm</sub> = 51,9</b> (statik, ortalama) · <b>σ<sub>vg</sub> = 13,0</b> (dinamik, genlik). Kontrol: dinamik = statik / 4.</p>
-<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136. &nbsp; 51,9 &lt; 136 ✓</p>
+<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136 &nbsp;(170: Smith diyagramının sol ekseni). &nbsp; 51,9 &lt; 136 ✓</p>
 <p><span class="st">Adım 5</span> <b>Smith diyagramı</b> (diyagrama σ<sub>vm</sub> = 51,9 ile gir):</p>
 <figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>
@@ -401,7 +401,7 @@ ul.tight li, ol.tight li { margin: 1px 0; }
 <div><p class="lbl"><b><span class="st">Adım 3</span> Dinamik (F = ±2000 N) → σ<sub>vg</sub></b></p><ul class="tight"><li>Çekme: σ = 2000 / 960 = <b>2,08</b> N/mm²</li><li>Kayma ve eğilme yok, o yüzden σ<sub>v</sub> = σ = <b>2,08</b> N/mm²</li></ul></div>
 </div>
 <p class="sumline">Sonuç: <b>σ<sub>vm</sub> = 8,33</b> (statik, ortalama) · <b>σ<sub>vg</sub> = 2,08</b> (dinamik, genlik). Kontrol: dinamik = statik / 4.</p>
-<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136. &nbsp; 8,33 &lt; 136 ✓</p>
+<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136 &nbsp;(170: Smith diyagramının sol ekseni). &nbsp; 8,33 &lt; 136 ✓</p>
 <p><span class="st">Adım 5</span> <b>Smith diyagramı</b> (diyagrama σ<sub>vm</sub> = 8,33 ile gir):</p>
 <figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>
@@ -500,7 +500,7 @@ ul.tight li, ol.tight li { margin: 1px 0; }
 <div><p class="lbl"><b><span class="st">Adım 3</span> Dinamik (F = ±2000 N) → σ<sub>vg</sub></b></p><ul class="tight"><li>Çekme: σ<sub>ç</sub> = 2000 / 960 = <b>2,08</b></li><li>Moment: M = 2000 · 20 = <b>40 000</b> Nmm (kol 20)</li><li>Eğilme: σ<sub>e</sub> = 40 000 / 13 280 = <b>3,01</b></li><li>Üst lif (ikisi aynı yönde, toplanır): σ = 2,08 + 3,01 = <b>5,1</b> N/mm²</li><li>Kayma yok, o yüzden σ<sub>v</sub> = σ = <b>5,1</b></li></ul></div>
 </div>
 <p class="sumline">Sonuç: <b>σ<sub>vm</sub> = 20,4</b> (statik, ortalama) · <b>σ<sub>vg</sub> = 5,1</b> (dinamik, genlik). Kontrol: dinamik = statik / 4.</p>
-<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136. &nbsp; 20,4 &lt; 136 ✓</p>
+<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136 &nbsp;(170: Smith diyagramının sol ekseni). &nbsp; 20,4 &lt; 136 ✓</p>
 <p><span class="st">Adım 5</span> <b>Smith diyagramı</b> (diyagrama σ<sub>vm</sub> = 20,4 ile gir):</p>
 <figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>
@@ -599,7 +599,7 @@ ul.tight li, ol.tight li { margin: 1px 0; }
 <div><p class="lbl"><b><span class="st">Adım 3</span> Dinamik (F = ±2000 N) → σ<sub>vg</sub></b></p><ul class="tight"><li>Çekme: σ<sub>ç</sub> = 2000 / 960 = <b>2,08</b></li><li>Moment: M = 2000 · 20 = <b>40 000</b> Nmm (kol 20)</li><li>Eğilme: σ<sub>e</sub> = 40 000 / 13 280 = <b>3,01</b></li><li>Alt lif (ikisi aynı yönde, toplanır): σ = 2,08 + 3,01 = <b>5,1</b> N/mm²</li><li>Kayma yok, o yüzden σ<sub>v</sub> = σ = <b>5,1</b></li></ul></div>
 </div>
 <p class="sumline">Sonuç: <b>σ<sub>vm</sub> = 20,4</b> (statik, ortalama) · <b>σ<sub>vg</sub> = 5,1</b> (dinamik, genlik). Kontrol: dinamik = statik / 4.</p>
-<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136. &nbsp; 20,4 &lt; 136 ✓</p>
+<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136 &nbsp;(170: Smith diyagramının sol ekseni). &nbsp; 20,4 &lt; 136 ✓</p>
 <p><span class="st">Adım 5</span> <b>Smith diyagramı</b> (diyagrama σ<sub>vm</sub> = 20,4 ile gir):</p>
 <figure class="fig sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="Inter, sans-serif">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker></defs>

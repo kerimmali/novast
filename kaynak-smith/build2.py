@@ -13,7 +13,7 @@ HERE = Path(__file__).resolve().parent
 # ---------------------------------------------------------------- sabitler
 A_C, A_K, I_X, Y_MAX = 960.0, 720.0, 478080.0, 36.0
 W = I_X / Y_MAX                       # 13 280
-SIG_EM = 170.0                        # parçanın statik emniyet gerilmesi (136 / 0,8)
+SIG_EM = 170.0                        # St37 Smith diyagramının sol ekseni (sigma_eD); 136 / 0,8 = 170
 V1_DIN, V2, V3 = 0.42, 1.0, 0.8       # iki taraflı düz köşe · 1. kalite · köşe (boğaz) kaynağı
 K_DIN = V1_DIN * V2 * V3              # 0,336
 SKEM_ST = 1.0 * V2 * V3 * SIG_EM      # 136
@@ -181,7 +181,7 @@ def example_html(ex):
 <div>{stress_lines(ex['kind'], dn, '<span class="st">Adım 3</span> Dinamik (F = ±2000 N) → σ<sub>vg</sub>')}</div>
 </div>
 <p class="sumline">Sonuç: <b>σ<sub>vm</sub> = {n(m0)}</b> (statik, ortalama) · <b>σ<sub>vg</sub> = {trg(g)}</b> (dinamik, genlik). Kontrol: dinamik = statik / 4.</p>
-<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136. &nbsp; {n(m0)} &lt; 136 ✓</p>
+<p><span class="st">Adım 4</span> <b>Statik kontrol:</b> σ<sub>kem</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>em</sub> = 1 · 1 · 0,8 · 170 = 136 &nbsp;(170: Smith diyagramının sol ekseni). &nbsp; {n(m0)} &lt; 136 ✓</p>
 <p><span class="st">Adım 5</span> <b>Smith diyagramı</b> (diyagrama σ<sub>vm</sub> = {n(m0)} ile gir):</p>
 <figure class="fig sm">{smith_svg(m0, g, height=400)}{legend()}</figure>
 <p class="calc">① sağa {n(m0)} → ② orta {n(m0)} → ③ üst ≈ {tr(su, 0)} → ④ alt ≈ {tr(sl, 0)} &nbsp;⇒&nbsp; σ<sub>ed</sub>' = üst − orta = {tr(su, 0)} − {n(m0)} = <b>{tr(se)}</b></p>
@@ -245,7 +245,7 @@ def main():
 <tr><td><b>v<sub>1</sub></b> dikiş faktörü</td><td>Yorulmada gerilme yığılması (dikişin çentik etkisi). <b>Statikte 1.</b></td><td>statik <b>1</b> · dinamik <b>0,42</b></td><td>tablo: iki taraflı, düz köşe dikişi</td></tr>
 <tr><td><b>v<sub>2</sub></b> kalite faktörü</td><td>Kaynağın kalitesi</td><td><b>1</b></td><td>1. kalite</td></tr>
 <tr><td><b>v<sub>3</sub></b> gerilme faktörü</td><td>Dikiş türü ve zorlanma türü</td><td><b>0,8</b></td><td>çelik, köşe (boğaz) kaynağı, her zorlanma</td></tr>
-<tr><td><b>σ<sub>em</sub></b></td><td>Parçanın emniyet gerilmesi</td><td>statik <b>170</b> · dinamik <b>σ<sub>ed</sub>'</b></td><td>dinamikte Smith diyagramından okunur</td></tr>
+<tr><td><b>σ<sub>em</sub></b></td><td>Parçanın emniyet gerilmesi</td><td>statik <b>170</b> · dinamik <b>σ<sub>ed</sub>'</b></td><td>ikisi de Smith diyagramından: 170 sol eksenden, σ<sub>ed</sub>' σ<sub>vm</sub>'de okunur</td></tr>
 </table>
 
 <h3>v<sub>1</sub>: Köşe dikişleri tablosu (hocanın slaytından)</h3>
@@ -292,16 +292,16 @@ def main():
 <div class="key">
 <p><b>Bütün örneklerde kullanacağımız iki sayı:</b></p>
 <ul class="tight">
-<li><b>Statik:</b> σ<sub>kem</sub> = 1 · 1 · 0,8 · 170 = <b>136 N/mm²</b>. Hocanın tahtadaki 136'sı tam bu: 136 / 0,8 = 170, yani parça için σ<sub>em</sub> = 170 alınmış.</li>
+<li><b>Statik:</b> σ<sub>kem</sub> = 1 · 1 · 0,8 · 170 = <b>136 N/mm²</b>. <b>170 nereden?</b> St37 Smith diyagramının sol ekseninden: σ<sub>m</sub> = 0'daki değer, σ<sub>eD</sub> = 170. Hocanın tahtadaki 136'sı ile birebir tutuyor (136 / 0,8 = 170). St44 olsaydı sol eksen 200 → 0,8 · 200 = 160 olurdu.</li>
 <li><b>Dinamik:</b> σ<sub>kem,D</sub> = 0,42 · 1 · 0,8 · σ<sub>ed</sub>' = <b>0,336 · σ<sub>ed</sub>'</b>. Burada σ<sub>em</sub> yerine Smith diyagramından okunan σ<sub>ed</sub>' girer.</li>
 </ul>
 </div>
 </section>
 
-<section>
+<section class="pb">
 <h2>3. Smith diyagramı: 30 saniyede hatırlatma</h2>
 <figure class="fig sm">{smith_svg(anatomy=True, height=400)}</figure>
-<p>Diyagram hocanın PDF'indeki St37 eğilme diyagramı: sol eksende <b>±170</b>, titreşimli noktada <b>290</b> (σ<sub>m</sub> = 145), akma <b>330</b>. Okumak için 4 hareket:</p>
+<p>Diyagram hocanın PDF'indeki St37 eğilme diyagramı: sol eksende <b>±170</b>, titreşimli noktada <b>290</b> (σ<sub>m</sub> = 145), akma <b>330</b>. Diyagramdan <b>iki sayı</b> alıyoruz: statik kontrol için <b>sol eksendeki 170</b> (σ<sub>em</sub>), dinamik kontrol için <b>σ<sub>ed</sub>'</b>. τ, σ ve σ<sub>v</sub>'yi ise hep formülle buluyoruz, diyagramdan değil. σ<sub>ed</sub>'yi okumak için 4 hareket:</p>
 <ol class="moves">
 <li><span class="mv r">① sağa</span> Yatay eksende σ<sub>vm</sub>'ye git (statik kısım).</li>
 <li><span class="mv k">② orta</span> Yukarı çık, kesik 45° çizgisine değ. Orta = σ<sub>vm</sub>.</li>
@@ -315,7 +315,7 @@ def main():
 <li><b>Hangisi var?</b> Çekme, kayma, eğilme: kuvvetin yönüne ve koluna bak.</li>
 <li><b>Statik gerilmeler</b> (8000 N) → σ<sub>vm</sub> = √(σ² + 3τ²)</li>
 <li><b>Dinamik gerilmeler</b> (±2000 N) → σ<sub>vg</sub> (statiğin dörtte biri)</li>
-<li><b>Statik kontrol:</b> σ<sub>vm</sub> ≤ σ<sub>kem</sub> = 136</li>
+<li><b>Statik kontrol:</b> σ<sub>vm</sub> ≤ σ<sub>kem</sub> = 0,8 · 170 = 136 (170 diyagramın sol ekseni)</li>
 <li><b>Smith:</b> σ<sub>vm</sub> ile diyagrama gir → σ<sub>ed</sub>' = üst − orta</li>
 <li><b>Dinamik kontrol:</b> σ<sub>kem,D</sub> = v<sub>1</sub>·v<sub>2</sub>·v<sub>3</sub>·σ<sub>ed</sub>' = 0,336·σ<sub>ed</sub>' → σ<sub>vg</sub> ≤ σ<sub>kem,D</sub> ise emniyetli. Kaç kat emniyetli: S = σ<sub>kem,D</sub> / σ<sub>vg</sub></li>
 </ol>
